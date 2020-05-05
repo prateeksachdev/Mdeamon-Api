@@ -1,0 +1,7 @@
+2020-04-27 14:58:39.2965|ERROR|AltnCrossAPI.BusinessLogic.OrdersBL|(401 Unauthorized) [API] Invalid API key or access token (unrecognized login or wrong password)
+2020-04-27 15:34:23.1553|ERROR|AltnCrossAPI.BusinessLogic.OrdersBL|(401 Unauthorized) [API] Invalid API key or access token (unrecognized login or wrong password)
+2020-04-27 16:27:43.5130|ERROR|AltnCrossAPI.BusinessLogic.OrdersBL|Object reference not set to an instance of an object.
+2020-04-27 16:29:58.5647|ERROR|AltnCrossAPI.BusinessLogic.OrdersBL|Object reference not set to an instance of an object.
+2020-04-27 16:30:59.8909|DEBUG|altn_common.KeyCodes.RegKey|Generating a new serial number
+2020-04-27 16:31:00.9091|DEBUG|altn_common.KeyCodes.RegKey|Logging new RegKey: 14DRG30-1V50K17-1YVNXE1
+2020-04-27 16:31:00.9161|DEBUG|altn_common.DataAccess|Logging key: altn_common.KeyCodes.RegKey

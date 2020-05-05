@@ -1,0 +1,10 @@
+2020-05-05 00:22:25.3316|DEBUG|altn_common.KeyCodes.RegKey|Getting info from db for key 14B6B50-H9E3336-6LSBWH2
+2020-05-05 01:32:13.1366|DEBUG|altn_common.KeyCodes.RegKey|Getting info from db for key 14B6B50-H9E3336-6LSBWH2
+2020-05-05 17:31:49.3735|DEBUG|altn_common.KeyCodes.RegKey|Getting info from db for key 14B6B50-H9E3336-6LSBWH2
+2020-05-05 17:31:59.2678|DEBUG|altn_common.KeyCodes.RegKey|Getting info from db for key 14B6B50-H9E3336-6LSBWH2
+2020-05-05 17:52:05.5847|DEBUG|altn_common.KeyCodes.RegKey|Getting info from db for key 14B6B50-H9E3336-6LSBWH2
+2020-05-05 18:06:19.4724|ERROR|AltnCrossAPI.Shared.Logging.Logger|CompleteOrder
+2020-05-05 18:16:24.7919|ERROR|AltnCrossAPI.Shared.Logging.Logger|CompleteOrder
+2020-05-05 18:24:00.3825|ERROR|AltnCrossAPI.Shared.Logging.Logger|Request from shopify could not verified as per the request headers received.
+2020-05-05 19:27:33.7338|ERROR|AltnCrossAPI.Shared.Logging.Logger|Request from shopify could not verified as per the request headers received.
+2020-05-05 22:04:13.4681|ERROR|AltnCrossAPI.Shared.Logging.Logger|CompleteOrder

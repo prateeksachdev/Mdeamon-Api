@@ -1,0 +1,15 @@
+2020-04-27 18:00:58.1498|DEBUG|altn_common.KeyCodes.RegKey|Generating a new serial number
+2020-04-27 18:00:59.3238|DEBUG|altn_common.KeyCodes.RegKey|Logging new RegKey: 14DR100-AE01864-92DNG4D
+2020-04-27 18:00:59.3348|DEBUG|altn_common.DataAccess|Logging key: altn_common.KeyCodes.RegKey
+2020-04-27 18:09:49.4394|ERROR|AltnCrossAPI.BusinessLogic.OrdersBL|POWireTransferPaymentsError
+2020-04-27 19:41:11.8931|ERROR|AltnCrossAPI.BusinessLogic.OrdersBL|(400 Bad Request) order: Required parameter missing or invalid
+2020-04-27 21:39:15.2608|DEBUG|altn_common.KeyCodes.RegKey|Generating a new serial number
+2020-04-27 21:39:22.4049|DEBUG|altn_common.KeyCodes.RegKey|Logging new RegKey: 14DRL39-710Y1H7-68DE724
+2020-04-27 21:39:22.4109|DEBUG|altn_common.DataAccess|Logging key: altn_common.KeyCodes.RegKey
+2020-04-27 21:40:26.4253|DEBUG|altn_common.KeyCodes.RegKey|Generating a new serial number
+2020-04-27 21:40:26.7151|DEBUG|altn_common.KeyCodes.RegKey|Logging new RegKey: 14DRL40-RXU1367-6D1V7V8
+2020-04-27 21:40:26.7151|DEBUG|altn_common.DataAccess|Logging key: altn_common.KeyCodes.RegKey
+2020-04-27 21:41:28.0050|DEBUG|altn_common.KeyCodes.RegKey|Generating a new serial number
+2020-04-27 21:41:28.1900|DEBUG|altn_common.KeyCodes.RegKey|Logging new RegKey: 14DRL41-2T3WSN7-6TG7A99
+2020-04-27 21:41:28.1950|DEBUG|altn_common.DataAccess|Logging key: altn_common.KeyCodes.RegKey
+2020-04-27 21:42:00.2807|DEBUG|altn_common.KeyCodes.RegKey|Generating a new serial number
