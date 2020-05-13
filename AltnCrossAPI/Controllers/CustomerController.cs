@@ -31,5 +31,19 @@ namespace AltnCrossAPI.Controllers
             Customer customer = JsonConvert.DeserializeObject<Customer>(userJson.ToString());
             return _customerBL.CustomerSync(customer).Message;
         }
+
+        /// <summary>
+        /// Action method to delete customer from db
+        /// </summary>
+        /// <param name="userJson">Customer Json posted by shopify</param>
+        /// <returns>Returns status of the request after processing</returns>
+        [HttpPost]
+        [ValidateShopifyRequest]
+        [ActionName("CustomerDelete")]
+        public string DeleteUser(object userJson)
+        {
+            Customer customer = JsonConvert.DeserializeObject<Customer>(userJson.ToString());
+            return _customerBL.CustomerDelete(customer).Message;
+        }
     }
 }

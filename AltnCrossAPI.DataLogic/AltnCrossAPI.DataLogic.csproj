@@ -47,17 +47,20 @@
   <ItemGroup>
     <Compile Include="DBInteractions\DBHelper.cs" />
     <Compile Include="DBInteractions\RegKeys.cs" />
+    <Compile Include="DBInteractions\Users.cs" />
     <Compile Include="DBInteractions\ShopifyData.cs" />
     <Compile Include="DBInteractions\ShopifyOrderAddresses.cs" />
     <Compile Include="DBInteractions\ShopifyOrderLineItems.cs" />
     <Compile Include="DBInteractions\ShopifyOrders.cs" />
     <Compile Include="Interfaces\IDBHelper.cs" />
     <Compile Include="Interfaces\IRegKeys.cs" />
+    <Compile Include="Interfaces\IUsers.cs" />
     <Compile Include="Interfaces\IShopifyData.cs" />
     <Compile Include="Interfaces\IShopifyOrderAddresses.cs" />
     <Compile Include="Interfaces\IShopifyOrderLineItems.cs" />
     <Compile Include="Interfaces\IShopifyOrders.cs" />
     <Compile Include="Models\RegKeyModel.cs" />
+    <Compile Include="Models\UsersModel.cs" />
     <Compile Include="Models\ShopifyDataModel.cs" />
     <Compile Include="Models\ShopifyOrderAddressModel.cs" />
     <Compile Include="Models\ShopifyOrderLineItemModel.cs" />

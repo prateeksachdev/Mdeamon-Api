@@ -12,6 +12,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using static AltnCrossAPI.Shared.Enums;
+using altn_common.Profiles;
 
 namespace AltnCrossAPI.BusinessLogic
 {
@@ -22,23 +23,29 @@ namespace AltnCrossAPI.BusinessLogic
         private readonly TransactionService transactionService = new TransactionService(ConfigHelper.ShopifyUrl, ConfigHelper.ShopAccessToken);
         private ILogger _logger;
         private IShopifyOrders _order;
+        private IUsers _user;
         private IShopifyData _shopifyData;
         private IShopifyOrderAddresses _address;
+        private ICustomersBL _customerBL;
         private IShopifyOrderLineItems _lineItem;
         private IRegKeys _regKey;
 
         public OrdersBL(IShopifyOrders order,
                         IShopifyData shopifyData,
+                        IUsers user,
                         IShopifyOrderLineItems lineItems,
+                        ICustomersBL customerBL,
                         IShopifyOrderAddresses addresses,
                         IRegKeys regKey,
             ILogger logger)
         {
             _order = order;
             _shopifyData = shopifyData;
+            _customerBL = customerBL;
             _address = addresses;
             _lineItem = lineItems;
             _regKey = regKey;
+            _user = user;
             _logger = logger;
         }
 
@@ -65,6 +72,11 @@ namespace AltnCrossAPI.BusinessLogic
                 bool paymentRequired = !(transactions.Any(t => t.Gateway.ToLower().Contains("wire transfer") || t.Gateway.ToLower().Contains("po") || t.Gateway.ToLower().Contains("payment on account")));
                 if ((transactions.Any(t => t.Gateway.ToLower().Contains("wire transfer") || t.Gateway.ToLower().Contains("po"))) && !order.Tags.Contains("Payment Received"))
                 {
+                    //add tag to shopify order
+                    var orderUpdated = await orderService.UpdateAsync(order.Id ?? 0, new Order()
+                    {
+                        Tags = "PO/Wire Transfer"
+                    });
                     _logger.Info(ToStringHttpCustomResponse(OrderHttpCustomResponse.POWireTransferPaymentsError));
                     return ToStringHttpCustomResponse(OrderHttpCustomResponse.POWireTransferPaymentsError);
                 }
@@ -190,7 +202,7 @@ namespace AltnCrossAPI.BusinessLogic
             catch (Exception exp)
             {
                 _logger.Error("OrderSync", exp);
-                return exp.Message;
+                return HttpStatusCode.InternalServerError.ToString();
             }
         }
 
@@ -205,8 +217,13 @@ namespace AltnCrossAPI.BusinessLogic
             try
             {
                 List<NoteAttribute> noteAttributes = new List<NoteAttribute>();
-                string userId = order.Customer.Id.ToString();
-                string userEmail = order.Email;
+                var customer = _user.UserGetByShopifyCustomerID(order.Customer.Id);
+                if(!customer.IsPopulated)//Customer does not exist. Add it.
+                {
+                    _customerBL.CustomerSync(order.Customer);
+                }
+                string userId = new UserProfile(order.Customer.Email).UserID;
+                string userEmail = order.Customer.Email;
 
                 //Get/Generate Keys for every Line Items
                 foreach (LineItem item in order.LineItems)
@@ -254,7 +271,7 @@ namespace AltnCrossAPI.BusinessLogic
                         fulfillment = await fulfillmentService.CreateAsync(order.Id ?? 0, fulfillment);
 
                         //Close Order
-                        await orderService.CloseAsync(order.Id ?? 0);
+                        //await orderService.CloseAsync(order.Id ?? 0);
                     }
                     else
                     {
@@ -273,7 +290,7 @@ namespace AltnCrossAPI.BusinessLogic
             catch (Exception exp)
             {
                 _logger.Error("CompleteOrder", exp);
-                return exp.Message;
+                return HttpStatusCode.InternalServerError.ToString();
             }
         }
     }
