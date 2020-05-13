@@ -47,8 +47,9 @@
     <Reference Include="AltNRegCLR">
       <HintPath>..\..\..\Downloads\AltnProjectExport_v0-2-20200312T113620Z-001\AltnProjectExport_v0-2\Release\AltNRegCLR.dll</HintPath>
     </Reference>
-    <Reference Include="altn_common">
-      <HintPath>..\..\..\Downloads\AltnProjectExport_v0-2-20200312T113620Z-001\AltnProjectExport_v0-2\Release\altn_common.dll</HintPath>
+    <Reference Include="altn_common, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>packages\altn_common.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Extensions.Primitives, Version=3.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">

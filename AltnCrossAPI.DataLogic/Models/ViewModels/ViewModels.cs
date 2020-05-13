@@ -1,5 +1,4 @@
-﻿using altn_common.Profiles;
-
+﻿
 namespace AltnCrossAPI.Database.ViewModels
 {
     public class BaseViewModels
@@ -17,9 +16,5 @@ namespace AltnCrossAPI.Database.ViewModels
             isValid = false;
         }
         public bool isValid { get; set; }
-    }
-    public class UserProfileViewModel: BaseViewModels
-    {
-        public UserProfile User { get; set; }
     }
 }

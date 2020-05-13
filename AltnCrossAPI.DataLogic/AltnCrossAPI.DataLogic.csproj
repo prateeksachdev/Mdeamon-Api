@@ -32,8 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="altn_common">
-      <HintPath>..\..\..\Downloads\AltnProjectExport_v0-3\altn_common.dll</HintPath>
+    <Reference Include="altn_common, Version=1.0.0.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\AltnCrossAPI\packages\altn_common.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
