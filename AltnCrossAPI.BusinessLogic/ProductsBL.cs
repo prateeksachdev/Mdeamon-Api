@@ -29,14 +29,14 @@ namespace AltnCrossAPI.BusinessLogic
             Result result = new Result();
             try
             {
-                if (productCode == "" && skuString == "")
+                if (string.IsNullOrWhiteSpace(productCode) && string.IsNullOrWhiteSpace(skuString))
                 {
                     result.Message = ToStringHttpCustomResponse(ProductsHttpCustomResponse.UnitPriceCodeOrSkuError);
                     return result;
                 }
 
                 ProductSku sku;
-                if (skuString != "")
+                if (!string.IsNullOrWhiteSpace(skuString))
                     sku = new ProductSku(skuString);
                 else
                     sku = new ProductSku(productCode, string.Empty, skuType, ProductType.PRO, ProductTierSize.OneUser, ProductType.PRO, ProductTierSize.None, duration, ProductDurationType.YR);

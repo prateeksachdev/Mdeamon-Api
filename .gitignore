@@ -192,3 +192,4 @@ AltnCrossAPI.Shared/obj/Debug/AltnCrossAPI.Shared.csproj.FileListAbsolute.txt
 AltnCrossAPI/Properties/PublishProfiles/FolderProfile.pubxml.user
 AltnCrossAPI/obj/Release/TransformWebConfig/transformed/Web.config
 AltnCrossAPI/obj/Release/_WPPLastBuildInfo.txt
+AltnCrossAPI/MyLogs/2020-05-16-api.log
