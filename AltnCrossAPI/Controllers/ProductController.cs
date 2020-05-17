@@ -27,18 +27,7 @@ namespace AltnCrossAPI.Controllers
         [HttpGet]
         public JsonResult<KeyValidityViewModel> GetKeyValidity(string versionString = "", string key = "")
         {
-            try
-            {
-                RegKey regKey = new RegKey(key);
-
-                ProductVersion version = new ProductVersion(versionString);
-
-                return Json(new KeyValidityViewModel { ErrorMessage = HttpStatusCode.OK.ToString(), isValid = regKey.IsValidForVersion(version) });
-            }
-            catch (Exception exp)
-            {
-                return Json(new KeyValidityViewModel { ErrorMessage = exp.Message });
-            }
+            return Json(_productsBL.GetKeyValidity(versionString, key));
         }
 
         /// <summary>

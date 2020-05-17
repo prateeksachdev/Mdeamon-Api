@@ -1,6 +1,7 @@
 ﻿using altn_common.Catalog;
 using altn_common.KeyCodes;
 using AltnCrossAPI.BusinessLogic.Interfaces;
+using AltnCrossAPI.Database.ViewModels;
 using AltnCrossAPI.Shared;
 using System;
 using System.Net;
@@ -10,6 +11,35 @@ namespace AltnCrossAPI.BusinessLogic
 {
     public class ProductsBL: IProductsBL
     {
+        /// <summary>
+        /// Checks if key is valid for given version of the product
+        /// </summary>
+        /// <param name="versionString">Product version</param>
+        /// <param name="key">Registration key to be checked</param>
+        /// <returns>Returns result based on key validity</returns>
+        public KeyValidityViewModel GetKeyValidity(string versionString = "", string key = "")
+        {
+            try
+            {
+                RegKey regKey = new RegKey(key);
+
+                ProductVersion version = new ProductVersion(versionString);
+                if (regKey.IsValidForVersion(version))
+                {
+                    return new KeyValidityViewModel { ErrorMessage = HttpStatusCode.OK.ToString(), AdditionalInfo = string.Format("Key expires on {0}", regKey.EndDate), isValid = true };
+                }
+                else
+                {
+                    return new KeyValidityViewModel { ErrorMessage = HttpStatusCode.OK.ToString(), AdditionalInfo = string.Format("The key you have entered is for another product({0})", regKey.ProductCode), isValid = false };
+                }
+            }
+            catch
+            {
+                return new KeyValidityViewModel { ErrorMessage = HttpStatusCode.InternalServerError.ToString() };
+            }
+        }
+
+
         /// <summary>
         /// Gets the unit price based on productCode or skuString.
         /// </summary>
