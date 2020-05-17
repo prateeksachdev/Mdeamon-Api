@@ -28,9 +28,13 @@ namespace AltnCrossAPI.BusinessLogic
                 {
                     return new KeyValidityViewModel { ErrorMessage = HttpStatusCode.OK.ToString(), AdditionalInfo = string.Format("Key expires on {0}", regKey.EndDate.ToString("yyyy/MM/dd")), isValid = true };
                 }
-                else
+                else if(regKey.IsPopulated)
                 {
                     return new KeyValidityViewModel { ErrorMessage = HttpStatusCode.OK.ToString(), AdditionalInfo = string.Format("The key you have entered is for another product({0})", regKey.ProductCode), isValid = false };
+                }
+                else
+                {
+                    return new KeyValidityViewModel { ErrorMessage = HttpStatusCode.OK.ToString(), AdditionalInfo = "The key you have entered is not valid", isValid = false };
                 }
             }
             catch
