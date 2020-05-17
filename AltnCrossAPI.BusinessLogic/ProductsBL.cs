@@ -26,7 +26,7 @@ namespace AltnCrossAPI.BusinessLogic
                 ProductVersion version = new ProductVersion(versionString);
                 if (regKey.IsValidForVersion(version))
                 {
-                    return new KeyValidityViewModel { ErrorMessage = HttpStatusCode.OK.ToString(), AdditionalInfo = string.Format("Key expires on {0}", regKey.EndDate), isValid = true };
+                    return new KeyValidityViewModel { ErrorMessage = HttpStatusCode.OK.ToString(), AdditionalInfo = string.Format("Key expires on {0}", regKey.EndDate.ToString("yyyy/MM/dd")), isValid = true };
                 }
                 else
                 {
