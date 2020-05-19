@@ -94,7 +94,7 @@ namespace AltnCrossAPI.BusinessLogic
                     sOrder.ProcessedOn = order.ProcessedAt.Value.UtcDateTime;
                     sOrder.Token = order.Token ?? "";
                     sOrder.CheckoutToken = order.CartToken ?? "";
-                    sOrder.Gateway = order.PaymentGatewayNames.ToString();
+                    sOrder.Gateway = order.PaymentGatewayNames.Any() ? string.Join(",", order.PaymentGatewayNames) : "";
                     sOrder.TotalPrice = order.TotalPrice ?? 0;
                     sOrder.TotalDiscount = order.TotalDiscounts ?? 0;
                     sOrder.SubTotalPrice = order.SubtotalPrice ?? 0;
