@@ -197,3 +197,5 @@ AltnCrossAPI.BusinessLogic/bin/Release/AltNRegCLR.dll
 AltnCrossAPI.DataLogic/bin/Release/AltNRegCLR.dll
 AltnCrossAPI.BusinessLogic/bin/Debug/AltNRegCLR.dll
 AltnCrossAPI.DataLogic/bin/Debug/AltNRegCLR.dll
+AltnCrossAPI/obj/
+AltnCrossAPI/MyLogs/
