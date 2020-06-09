@@ -9,7 +9,7 @@ using static AltnCrossAPI.Shared.Enums;
 
 namespace AltnCrossAPI.BusinessLogic
 {
-    public class ProductsBL: IProductsBL
+    public class ProductsBL : IProductsBL
     {
         /// <summary>
         /// Checks if key is valid for given version of the product
@@ -28,7 +28,7 @@ namespace AltnCrossAPI.BusinessLogic
                 {
                     return new KeyValidityViewModel { ErrorMessage = HttpStatusCode.OK.ToString(), AdditionalInfo = string.Format("Key expires on {0}", regKey.EndDate.ToString("yyyy/MM/dd")), isValid = true };
                 }
-                else if(regKey.IsPopulated)
+                else if (regKey.IsPopulated)
                 {
                     return new KeyValidityViewModel { ErrorMessage = HttpStatusCode.OK.ToString(), AdditionalInfo = string.Format("The key you have entered is for another product({0})", regKey.ProductCode), isValid = false };
                 }
@@ -75,14 +75,15 @@ namespace AltnCrossAPI.BusinessLogic
                 else
                     sku = new ProductSku(productCode, string.Empty, skuType, ProductType.PRO, ProductTierSize.OneUser, ProductType.PRO, ProductTierSize.None, duration, ProductDurationType.YR);
 
-                RegKey oldRegKey;
+                UnitPriceResponse response;
                 if (!string.IsNullOrEmpty(oldKey))
-                    oldRegKey = new RegKey(oldKey);
+                {
+                    RegKey oldKeyObj = new RegKey(oldKey);
+                    response = Catalog.GetUnitPrice(sku, (oldKeyObj.ProductSize > 0 ? oldKeyObj.ProductSize : 5), oldKeyObj, int.MinValue, DateTime.MinValue, userId, userEmail);
+                }
                 else
-                    oldRegKey = null;
+                    response = Catalog.GetUnitPrice(sku, newQty, null, int.MinValue, DateTime.MinValue, userId, userEmail);
 
-                //Get unit price form database using client's dll
-                UnitPriceResponse response = Catalog.GetUnitPrice(sku, newQty, oldRegKey, int.MinValue, DateTime.MinValue, userId, userEmail);
                 result.Data = new
                 {
                     response.SAPrice,
