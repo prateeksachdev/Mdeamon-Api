@@ -9,6 +9,8 @@ namespace AltnCrossAPI.Database.Interfaces
 
         void ShopifyOrderLineItemInsertUpdate(ShopifyOrderLineItemModel model);
 
+        void ShopifyOrderLineItemRegKeyUpdate(long orderId, long shopifyId, string regKey);
+
         void ShopifyOrderLineItemsDelete(string whereClause);
     }
 }

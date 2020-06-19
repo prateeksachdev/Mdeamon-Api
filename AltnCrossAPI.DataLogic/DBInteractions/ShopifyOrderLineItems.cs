@@ -38,6 +38,16 @@ namespace AltnCrossAPI.Database
             _dbHelper.ExecuteNonQuery("ShopifyOrderLineItemInsertUpdate", parameters);
         }
 
+        public void ShopifyOrderLineItemRegKeyUpdate(long orderId, long shopifyId, string regKey)
+        {
+            SqlParameter[] parameters = { new SqlParameter("@ShopifyId", shopifyId),
+            new SqlParameter("@OrderId", orderId),
+            new SqlParameter("@RegKey", regKey)
+            };
+
+            _dbHelper.ExecuteNonQuery("ShopifyOrderLineItemRegKeyUpdate", parameters);
+        }
+
         public void ShopifyOrderLineItemsDelete(string whereClause)
         {
             SqlParameter[] parameters = { new SqlParameter("@WhereClause", whereClause) };

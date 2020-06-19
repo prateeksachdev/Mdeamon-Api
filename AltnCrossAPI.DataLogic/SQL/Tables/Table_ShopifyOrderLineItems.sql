@@ -31,6 +31,7 @@ CREATE TABLE [dbo].[ShopifyOrderLineItems](
 	[TaxCode] [varchar](30) NULL,
 	[DateAdded] [datetime] NULL,
 	[DateUpdated] [datetime] NULL,
+	[RegKey] [varchar](255) NULL,
  CONSTRAINT [PK_ShopifyOrderLineItems] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC

@@ -243,12 +243,13 @@ namespace AltnCrossAPI.BusinessLogic
                         var licenseTerm = item.Properties.Any(p => p.Name.ToString() == "licence_Term") ? int.Parse(item.Properties.FirstOrDefault(p => p.Name.ToString() == "licence_Term").Value.ToString()) : 1;
                         RegKey regKey = new RegKey("", userId, userEmail, null, "", sku, sku.ProductCode, ProductType.PRO, item.Quantity ?? 1, RegKeyStatus.Purchased, DateTime.Now, DateTime.Now.AddYears(licenseTerm), true);
                         regKey.Save("ShopifyAPI", KeyChangeMethod.PURCHASE, "");
-                        noteAttributes.Add(new NoteAttribute { Name = item.Id.ToString(), Value = regKey.KeyString });
+                        keyString = regKey.KeyString;
                     }
-                    else
-                    {
-                        noteAttributes.Add(new NoteAttribute { Name = item.Id.ToString(), Value = keyString });
-                    }
+
+                    noteAttributes.Add(new NoteAttribute { Name = item.Id.ToString(), Value = keyString });
+
+                    //Update key in DB for shopify line item
+                    _lineItem.ShopifyOrderLineItemRegKeyUpdate(order.Id ?? 0, item.Id ?? 0, keyString);
                 }
                 //Check if any key retrieved from db
                 if (noteAttributes.Count() > 0)
