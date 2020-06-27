@@ -18,4 +18,14 @@ namespace AltnCrossAPI.Database.ViewModels
         }
         public bool isValid { get; set; }
     }
+    public class CustomVariantViewModel
+    {
+        public long ProductId { get; set; }
+        public long VariantId { get; set; }
+        public decimal Price { get; set; }
+    }
+    public class ResponseViewModel: BaseViewModels
+    {
+        public object response { get; set; }
+    }
 }

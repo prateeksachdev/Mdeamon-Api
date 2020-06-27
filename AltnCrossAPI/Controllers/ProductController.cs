@@ -2,8 +2,13 @@
 using AltnCrossAPI.BusinessLogic.Interfaces;
 using AltnCrossAPI.Database.ViewModels;
 using AltnCrossAPI.Shared;
+using Newtonsoft.Json;
+using ShopifySharp;
 using System;
+using System.Linq;
+using System.Collections.Generic;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Results;
 
@@ -49,6 +54,51 @@ namespace AltnCrossAPI.Controllers
         {
             Result result = _productsBL.GetUnitPrice(productCode, skuString, skuType, newQty, oldKey, duration, userId, userEmail);
             return Json(new UnitPriceResponseViewModel { ErrorMessage = result.Message, priceResponse = result.Data });
+        }
+
+        /// <summary>
+        /// Action method to Insert a new shopify product or Update existing shopify product in db
+        /// </summary>
+        /// <param name="productJson">Product Json posted by shopify</param>
+        /// <returns>Returns status of the request after processing</returns>
+        [HttpPost]
+        //[ValidateShopifyRequest]
+        [ActionName("ProductSync")]
+        public async Task<string> Product(object productJson)
+        {
+            Product product = JsonConvert.DeserializeObject<Product>(productJson.ToString());
+            return await _productsBL.ProductSync(product);
+        }
+
+
+        /// <summary>
+        /// Action method to return VariantIds based on the productid and price array passed. 
+        /// It creates new Variant if it already does not exist.
+        /// </summary>
+        /// <param name="productValueArray">Array of Product Ids and corresponding Values</param>
+        /// <returns>Returns Variants Ids</returns>
+        [HttpPost]
+        //[ValidateShopifyRequest]
+        [ActionName("CustomVariant")]
+        public async Task<JsonResult<ResponseViewModel>> CustomProductVariant(object productValueArray)
+        {
+            List<CustomVariantViewModel> customVariant = JsonConvert.DeserializeObject<List<CustomVariantViewModel>>(productValueArray.ToString());
+            Result result = await _productsBL.CustomVariant(customVariant);
+            return Json(new ResponseViewModel { ErrorMessage = result.Message, response = result.Data });
+        }
+
+        /// <summary>
+        /// Action method to delete product from db
+        /// </summary>
+        /// <param name="productJson">Product Json posted by shopify</param>
+        /// <returns>Returns status of the request after processing</returns>
+        [HttpPost]
+        //[ValidateShopifyRequest]
+        [ActionName("Delete")]
+        public string DeleteProduct(object productJson)
+        {
+            Product product = JsonConvert.DeserializeObject<Product>(productJson.ToString());
+            return _productsBL.Delete(product).Message;
         }
     }
 }

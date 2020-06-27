@@ -406,7 +406,7 @@ namespace AltnCrossAPI.Database
 			}
 		}
 
-		internal string ExecuteReaderQuery(string query, SqlParameter[] parameters)
+		internal T ExecuteReaderQuery<T>(string query, SqlParameter[] parameters, T defaultValue = default(T))
 		{
 			SqlCommand cmdToExecute = new SqlCommand();
 			cmdToExecute.CommandText = query;
@@ -420,9 +420,10 @@ namespace AltnCrossAPI.Database
 				OpenConnection();
 
 				var dr = cmdToExecute.ExecuteReader();
-				return dr.Read() ? dr.GetString(0) : "";
-			}
-			catch (Exception ex)
+
+				return dr.Read() ? (T)dr[0] : defaultValue;
+            }
+            catch (Exception ex)
 			{
 				throw ex;
 			}

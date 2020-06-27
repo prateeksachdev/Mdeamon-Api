@@ -21,6 +21,8 @@ namespace AltnCrossAPI
             container.Register<IUsers, Users>();
             container.Register<IShopifyOrders, ShopifyOrder>();
             container.Register<IShopifyData, ShopifyData>();
+            container.Register<IShopifyProductVariants, ShopifyProductVariants>();
+            container.Register<IShopifyProducts, ShopifyProducts>();
             container.Register<IShopifyOrderAddresses, ShopifyOrderAddresses>();
             container.Register<IShopifyOrderLineItems, ShopifyOrderLineItems>();
             container.Register<IRegKeys, RegKeys>();

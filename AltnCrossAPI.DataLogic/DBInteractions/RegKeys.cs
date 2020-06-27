@@ -21,7 +21,7 @@ namespace AltnCrossAPI.Database
             new SqlParameter("@SKU", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 10, 0, "", DataRowVersion.Proposed, model.SKU)
             };
 
-            return _dbHelper.ExecuteReaderQuery("select KeyString from RegKeys where UserID = @UserID and UserEmail = @UserEmail and SKU = @SKU and ProductSize = @ProductSize", parameters);            
+            return _dbHelper.ExecuteReaderQuery<string>("select KeyString from RegKeys where UserID = @UserID and UserEmail = @UserEmail and SKU = @SKU and ProductSize = @ProductSize", parameters);            
         }
     }
 }
