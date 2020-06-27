@@ -1,0 +1,143 @@
+﻿
+
+Avinstallationen påbörjas.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+
+Avinstallationen slutfördes.
+
+Kör en överförd installation.
+
+Startar installationsfasen av installationen.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+
+Ett undantag uppstod under installationsfasen.
+System.ComponentModel.Win32Exception: Den angivna tjänsten är markerad för borttagning
+
+Startar återställningsfasen av installationen.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+
+Återställningsfasen slutfördes.
+
+Den överförda installationen slutfördes.
+
+Kör en överförd installation.
+
+Startar installationsfasen av installationen.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+
+Installationsfasen slutfördes och allokeringsfasen inleds.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+
+Allokeringsfasen slutfördes.
+
+Den överförda installationen slutfördes.
+
+
+Avinstallationen påbörjas.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+Ett undantag uppstod under avinstallationen av installationsprogrammet System.Configuration.Install.AssemblyInstaller.
+System.InvalidOperationException: Det gick inte att skapa en instans av ett installationsprogram av typen xc11889.Integration.ServiceHost.ProjectInstaller.
+Det interna undantaget System.Reflection.TargetInvocationException utlöstes med följande felmeddelande: Ett undantagsfel har inträffat i målet för en aktivering..
+Det interna undantaget System.Configuration.ConfigurationErrorsException utlöstes med följande felmeddelande: Failed to find a value for key: ServiceName.
+Ett undantag uppstod under avinstallationen. Undantaget ignoreras och avinstallationen fortsätter. Men tillämpningsprogrammet avinstalleras eventuellt inte helt när avinstallationen slutförs.
+
+Avinstallationen slutfördes.
+
+
+Avinstallationen påbörjas.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+
+Avinstallationen slutfördes.
+
+Kör en överförd installation.
+
+Startar installationsfasen av installationen.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+
+Ett undantag uppstod under installationsfasen.
+System.InvalidOperationException: Det gick inte att skapa en instans av ett installationsprogram av typen xc11889.Integration.ServiceHost.ProjectInstaller.
+Det interna undantaget System.Reflection.TargetInvocationException utlöstes med följande felmeddelande: Ett undantagsfel har inträffat i målet för en aktivering..
+Det interna undantaget System.Configuration.ConfigurationErrorsException utlöstes med följande felmeddelande: Failed to find a value for key: ServiceName.
+
+Startar återställningsfasen av installationen.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+Ett undantag uppstod under återställningsfasen för installationsprogrammet System.Configuration.Install.AssemblyInstaller.
+System.InvalidOperationException: Det gick inte att skapa en instans av ett installationsprogram av typen xc11889.Integration.ServiceHost.ProjectInstaller.
+Det interna undantaget System.Reflection.TargetInvocationException utlöstes med följande felmeddelande: Ett undantagsfel har inträffat i målet för en aktivering..
+Det interna undantaget System.Configuration.ConfigurationErrorsException utlöstes med följande felmeddelande: Failed to find a value for key: ServiceName.
+Ett undantag uppstod under installationens återställningsfas. Undantaget ignoreras och återställningen fortsätter. Men datorn återgår eventuellt inte till det ursprungliga tillståndet när återställningen har avslutats.
+
+Återställningsfasen slutfördes.
+
+Den överförda installationen slutfördes.
+
+Kör en överförd installation.
+
+Startar installationsfasen av installationen.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+
+Ett undantag uppstod under installationsfasen.
+System.InvalidOperationException: Det gick inte att skapa en instans av ett installationsprogram av typen xc11889.Integration.ServiceHost.ProjectInstaller.
+Det interna undantaget System.Reflection.TargetInvocationException utlöstes med följande felmeddelande: Ett undantagsfel har inträffat i målet för en aktivering..
+Det interna undantaget System.Configuration.ConfigurationErrorsException utlöstes med följande felmeddelande: Failed to find a value for key: ServiceName.
+
+Startar återställningsfasen av installationen.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+Ett undantag uppstod under återställningsfasen för installationsprogrammet System.Configuration.Install.AssemblyInstaller.
+System.InvalidOperationException: Det gick inte att skapa en instans av ett installationsprogram av typen xc11889.Integration.ServiceHost.ProjectInstaller.
+Det interna undantaget System.Reflection.TargetInvocationException utlöstes med följande felmeddelande: Ett undantagsfel har inträffat i målet för en aktivering..
+Det interna undantaget System.Configuration.ConfigurationErrorsException utlöstes med följande felmeddelande: Failed to find a value for key: ServiceName.
+Ett undantag uppstod under installationens återställningsfas. Undantaget ignoreras och återställningen fortsätter. Men datorn återgår eventuellt inte till det ursprungliga tillståndet när återställningen har avslutats.
+
+Återställningsfasen slutfördes.
+
+Den överförda installationen slutfördes.
+
+Kör en överförd installation.
+
+Startar installationsfasen av installationen.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+
+Ett undantag uppstod under installationsfasen.
+System.InvalidOperationException: Det gick inte att skapa en instans av ett installationsprogram av typen xc11889.Integration.ServiceHost.ProjectInstaller.
+Det interna undantaget System.Reflection.TargetInvocationException utlöstes med följande felmeddelande: Ett undantagsfel har inträffat i målet för en aktivering..
+Det interna undantaget System.Configuration.ConfigurationErrorsException utlöstes med följande felmeddelande: Failed to find a value for key: ServiceName.
+
+Startar återställningsfasen av installationen.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+Ett undantag uppstod under återställningsfasen för installationsprogrammet System.Configuration.Install.AssemblyInstaller.
+System.InvalidOperationException: Det gick inte att skapa en instans av ett installationsprogram av typen xc11889.Integration.ServiceHost.ProjectInstaller.
+Det interna undantaget System.Reflection.TargetInvocationException utlöstes med följande felmeddelande: Ett undantagsfel har inträffat i målet för en aktivering..
+Det interna undantaget System.Configuration.ConfigurationErrorsException utlöstes med följande felmeddelande: Failed to find a value for key: ServiceName.
+Ett undantag uppstod under installationens återställningsfas. Undantaget ignoreras och återställningen fortsätter. Men datorn återgår eventuellt inte till det ursprungliga tillståndet när återställningen har avslutats.
+
+Återställningsfasen slutfördes.
+
+Den överförda installationen slutfördes.
+
+Kör en överförd installation.
+
+Startar installationsfasen av installationen.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+
+Installationsfasen slutfördes och allokeringsfasen inleds.
+Se loggfilen om du vill ha information om installationsförloppet för sammansättningen D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.exe.
+Filen finns på D:\SourceCode\Svenska Mässan\Visma Control 9.0.0\Integrations\IntegrationService\Source Code\xc11889.Integration.Service\bin\Debug\xc11889.Integration.ServiceHost.InstallLog.
+
+Allokeringsfasen slutfördes.
+
+Den överförda installationen slutfördes.
