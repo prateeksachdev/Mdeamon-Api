@@ -21,6 +21,7 @@ namespace AltnCrossAPI.Database.ViewModels
     public class CustomVariantViewModel
     {
         public long ProductId { get; set; }
+        public long DuplicateProductId { get; set; }
         public long VariantId { get; set; }
         public decimal Price { get; set; }
     }

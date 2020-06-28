@@ -62,7 +62,7 @@ namespace AltnCrossAPI.Controllers
         /// <param name="productJson">Product Json posted by shopify</param>
         /// <returns>Returns status of the request after processing</returns>
         [HttpPost]
-        //[ValidateShopifyRequest]
+        [ValidateShopifyRequest]
         [ActionName("ProductSync")]
         public async Task<string> Product(object productJson)
         {
@@ -78,7 +78,7 @@ namespace AltnCrossAPI.Controllers
         /// <param name="productValueArray">Array of Product Ids and corresponding Values</param>
         /// <returns>Returns Variants Ids</returns>
         [HttpPost]
-        //[ValidateShopifyRequest]
+        [ValidateShopifyRequest]
         [ActionName("CustomVariant")]
         public async Task<JsonResult<ResponseViewModel>> CustomProductVariant(object productValueArray)
         {
@@ -93,7 +93,7 @@ namespace AltnCrossAPI.Controllers
         /// <param name="productJson">Product Json posted by shopify</param>
         /// <returns>Returns status of the request after processing</returns>
         [HttpPost]
-        //[ValidateShopifyRequest]
+        [ValidateShopifyRequest]
         [ActionName("Delete")]
         public string DeleteProduct(object productJson)
         {

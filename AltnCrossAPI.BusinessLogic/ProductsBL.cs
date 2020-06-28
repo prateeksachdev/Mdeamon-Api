@@ -165,6 +165,7 @@ namespace AltnCrossAPI.BusinessLogic
                             variantId = _productVariant.ShopifyProductVariantIdGet(localProduct.ShopifyId, model.Price);
                             if (variantId > 0)//check if child product already has this variant
                             {
+                                model.DuplicateProductId = localProduct.ShopifyId;
                                 model.VariantId = variantId;
                                 continue;
                             }
@@ -217,27 +218,13 @@ namespace AltnCrossAPI.BusinessLogic
                             };
                             newProduct = await productService.CreateAsync(newProduct);
 
-                            //MetaField fie = await metaFieldService.CreateAsync(new MetaField { Namespace = newProduct.Id.ToString(), Key = "ParentProductHandle", Value = product.Handle, ValueType = "string" }, newProduct.Id ?? 0, "products");
-
+                            model.DuplicateProductId = newProduct.Id ?? 0;
                             model.VariantId = newProduct.Variants.ToList().First().Id ?? 0;
                             continue;
                         }
 
                         variant = await variantService.CreateAsync(variant.ProductId ?? 0, variant);
                         model.VariantId = variant.Id ?? 0;
-
-                        //ShopifyProductVariantModel sProductVariant = new ShopifyProductVariantModel();
-                        //sProductVariant.ShopifyId = variant.Id ?? 0;
-                        //sProductVariant.ProductId = variant.ProductId ?? 0;
-                        //sProductVariant.CompareAtPrice = variant.CompareAtPrice;
-                        //sProductVariant.Price = variant.Price;
-                        //sProductVariant.SKU = variant.SKU;
-                        //sProductVariant.Title = variant.Title;
-                        //sProductVariant.Weight = variant.Weight;
-                        //sProductVariant.WeightUnit = variant.WeightUnit;
-                        //sProductVariant.InventoryQuantity = variant.InventoryQuantity;
-                        //sProductVariant.InventoryItemId = variant.InventoryItemId;
-                        //_productVariant.ShopifyProductVariantInsertUpdate(sProductVariant);
                     }
                 }
                 result.Data = variantModel;
@@ -283,8 +270,10 @@ namespace AltnCrossAPI.BusinessLogic
                 int shopifyDataId = _shopifyData.ShopifyDataInsert(sData);
 
                 //check meta fields for parent product if any
-                long parentProductId;
-                long.TryParse((await metaFieldService.ListAsync(product.Id ?? 0, "products")).Items.FirstOrDefault(m => m.Key == "ParentProductID").Value.ToString(), out parentProductId);
+                long parentProductId = 0;
+                var metaFields = await metaFieldService.ListAsync(product.Id ?? 0, "products");
+                if (metaFields.Items.Any() && metaFields.Items.Any(m => m.Key == "ParentProductID"))
+                    long.TryParse((metaFields).Items.FirstOrDefault(m => m.Key == "ParentProductID").Value.ToString(), out parentProductId);
 
                 //Insert or Update order in database as per the json received from shopify
                 ShopifyProductModel sProduct = new ShopifyProductModel();

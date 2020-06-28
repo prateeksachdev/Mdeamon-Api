@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -31,6 +32,9 @@ namespace Altn.Service.Plugin.Shopify
 
                 if (_settings.SyncExistingProducts)//Sync already existing products from shopify to db
                 {
+                    UpdateSetting("SyncExistingProducts", "false");
+
+
                     ProductService productService = new ProductService(_settings.ShopifyUrl, _settings.ShopAccessToken);
                     var pList = await productService.ListAsync();
 
@@ -67,6 +71,15 @@ namespace Altn.Service.Plugin.Shopify
             {
                 _Log.Error("Start :: " + exp.Message, exp);
             }
+        }
+
+        private static void UpdateSetting(string key, string value)
+        {
+            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            configuration.AppSettings.Settings[key].Value = value;
+            configuration.Save();
+
+            ConfigurationManager.RefreshSection("appSettings");
         }
     }
 }
