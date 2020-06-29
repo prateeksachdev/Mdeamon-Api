@@ -165,7 +165,7 @@ namespace AltnCrossAPI.BusinessLogic
                             variantId = _productVariant.ShopifyProductVariantIdGet(localProduct.ShopifyId, model.Price);
                             if (variantId > 0)//check if child product already has this variant
                             {
-                                model.DuplicateProductId = localProduct.ShopifyId;
+                                model.ProductId = localProduct.ShopifyId;
                                 model.VariantId = variantId;
                                 continue;
                             }
@@ -218,7 +218,7 @@ namespace AltnCrossAPI.BusinessLogic
                             };
                             newProduct = await productService.CreateAsync(newProduct);
 
-                            model.DuplicateProductId = newProduct.Id ?? 0;
+                            model.ProductId = newProduct.Id ?? 0;
                             model.VariantId = newProduct.Variants.ToList().First().Id ?? 0;
                             continue;
                         }
