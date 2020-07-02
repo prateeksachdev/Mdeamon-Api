@@ -24,6 +24,7 @@ namespace AltnCrossAPI.BusinessLogic
     public class ProductsBL : IProductsBL
     {
         private readonly ProductVariantService variantService = new ProductVariantService(ConfigHelper.ShopifyUrl, ConfigHelper.ShopAccessToken);
+        private readonly InventoryItemService inventoryItemService = new InventoryItemService(ConfigHelper.ShopifyUrl, ConfigHelper.ShopAccessToken);
         private readonly MetaFieldService metaFieldService = new MetaFieldService(ConfigHelper.ShopifyUrl, ConfigHelper.ShopAccessToken);
         private readonly ProductService productService = new ProductService(ConfigHelper.ShopifyUrl, ConfigHelper.ShopAccessToken); private IShopifyData _shopifyData;
         private ILogger _logger;
@@ -219,12 +220,35 @@ namespace AltnCrossAPI.BusinessLogic
                             newProduct = await productService.CreateAsync(newProduct);
 
                             model.ProductId = newProduct.Id ?? 0;
-                            model.VariantId = newProduct.Variants.ToList().First().Id ?? 0;
-                            continue;
+                            variant = newProduct.Variants.ToList().First();
+                            goto SetTracking;
                         }
 
                         variant = await variantService.CreateAsync(variant.ProductId ?? 0, variant);
+
+                    SetTracking:
                         model.VariantId = variant.Id ?? 0;
+
+
+
+                        //Variant can be updated only via level
+                        var ids = new List<long>()
+                        {
+                            variant.InventoryItemId.Value
+                        };
+
+                        var inventoryItemFilter = new InventoryItemListFilter()
+                        {
+                            Ids = ids
+                        };
+
+                        var items = await inventoryItemService.ListAsync(inventoryItemFilter);
+
+                        var item = items.Items.First();
+
+                        item.Tracked = false;
+
+                        await inventoryItemService.UpdateAsync(item.Id ?? 0, item);
                     }
                 }
                 result.Data = variantModel;
@@ -232,16 +256,7 @@ namespace AltnCrossAPI.BusinessLogic
             catch (ShopifyException ex)
             {
                 _logger.Error("CustomVariant", ex);
-
-                switch (ex.HttpStatusCode)
-                {
-                    case HttpStatusCode.NotFound:
-                        result.Message = ex.Message;
-                        break;
-                    default:
-                        result.Message = HttpStatusCode.InternalServerError.ToString();
-                        break;
-                }
+                result.Message = ex.Message;
             }
             catch (Exception exp)
             {
