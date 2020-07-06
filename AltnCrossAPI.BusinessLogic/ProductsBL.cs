@@ -205,14 +205,13 @@ namespace AltnCrossAPI.BusinessLogic
                         if (product.Variants.Count() > 99)//Create duplicate product in shopify becasue shopify allow 100 variants max
                         {
                             //var existingField = await metaFieldService.ListAsync(5084926017676, "products");
-                            string filedNamespace = DateTime.Now.Ticks.ToString();
                             Product newProduct = new Product()
                             {
                                 Title = product.Title,
                                 Vendor = product.Vendor,
                                 BodyHtml = product.BodyHtml,
                                 ProductType = product.ProductType,
-                                Metafields = (new MetaField[] { new MetaField { Namespace = filedNamespace, Key = "ParentProductHandle", Value = product.Handle, ValueType = "string" }, new MetaField { Namespace = filedNamespace, Key = "ParentProductID", Value = product.Id.ToString(), ValueType = "string" } }),
+                                Metafields = (new MetaField[] { new MetaField { Namespace = "product_duplicate", Key = "ParentProductHandle", Value = product.Handle, ValueType = "string" }, new MetaField { Namespace = "product_duplicate", Key = "ParentProductID", Value = product.Id.ToString(), ValueType = "string" } }),
                                 Options = product.Options,
                                 Images = product.Images,
                                 Variants = new ProductVariant[] { variant }
@@ -228,8 +227,6 @@ namespace AltnCrossAPI.BusinessLogic
 
                     SetTracking:
                         model.VariantId = variant.Id ?? 0;
-
-
 
                         //Variant can be updated only via level
                         var ids = new List<long>()
