@@ -42,6 +42,8 @@ namespace AltnCrossAPI.Database
             new SqlParameter("@ProductId", model.ProductId),
             new SqlParameter("@CompareAtPrice", model.CompareAtPrice),
             new SqlParameter("@Price", model.Price),
+            new SqlParameter("@Barcode", model.Barcode),
+            new SqlParameter("@SKU", model.SKU),
             new SqlParameter("@Title", model.Title),
             new SqlParameter("@Weight", model.Weight),
             new SqlParameter("@WeightUnit", model.WeightUnit),

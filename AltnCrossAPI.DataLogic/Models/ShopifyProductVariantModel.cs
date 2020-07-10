@@ -24,6 +24,8 @@ namespace AltnCrossAPI.Database.Models
 
         public string Title { get; set; }
 
+        public string Barcode { get; set; }
+
         public int? InventoryQuantity { get; set; }
 
         public long? InventoryItemId { get; set; }

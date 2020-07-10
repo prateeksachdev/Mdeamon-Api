@@ -64,6 +64,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dto\ShopifyProductRepDto.cs" />
+    <Compile Include="Repository\ShopifyProductRep.cs" />
     <Compile Include="Repository\ShopifyProductVariantsRep.cs" />
     <Compile Include="Dto\ShopifyProductVariantsRepDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

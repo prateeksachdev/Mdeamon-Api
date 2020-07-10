@@ -164,9 +164,9 @@ namespace AltnCrossAPI.BusinessLogic
                         if (localProduct?.ShopifyId > 0)
                         {
                             variantId = _productVariant.ShopifyProductVariantIdGet(localProduct.ShopifyId, model.Price);
+                            model.ProductId = localProduct.ShopifyId;
                             if (variantId > 0)//check if child product already has this variant
                             {
-                                model.ProductId = localProduct.ShopifyId;
                                 model.VariantId = variantId;
                                 continue;
                             }
@@ -178,11 +178,15 @@ namespace AltnCrossAPI.BusinessLogic
                         else
                             product = await productService.GetAsync(model.ProductId);//child does not exists. continue with current product
 
+                        var defaultVariant = product.Variants.OrderBy(v => v.CreatedAt).FirstOrDefault();//To get SKU for new variant
                         //Create Custom Variant
-                        var variant = new ProductVariant()
+                        ProductVariant variant = new ProductVariant()
                         {
                             ProductId = product.Id,
-                            Price = model.Price
+                            Price = model.Price,
+                            SKU = defaultVariant.SKU,
+                            Barcode = "custom",
+                            RequiresShipping = false
                         };
 
                         for (int index = 0; index < product.Options.Count(); index++)
@@ -190,10 +194,10 @@ namespace AltnCrossAPI.BusinessLogic
                             switch (index)
                             {
                                 case 0:
-                                    variant.Option1 = "CustomVariant" + model.Price;//Variant Title depeds upon Options provided and Shopify does not create same title again and again
+                                    variant.Option1 = defaultVariant.SKU + "_" + model.Price + "_" + model.UserCount;//Variant Title depeds upon Options provided and Shopify does not create same title again and again
                                     break;
                                 case 1:
-                                    variant.Option2 = "Custom";
+                                    variant.Option2 = defaultVariant.SKU;
                                     break;
                                 case 3:
                                     variant.Option3 = "Custom";
@@ -310,6 +314,7 @@ namespace AltnCrossAPI.BusinessLogic
                     sProductVariant.ProductId = product.Id ?? 0;
                     sProductVariant.CompareAtPrice = variant.CompareAtPrice;
                     sProductVariant.Price = variant.Price;
+                    sProductVariant.Barcode = variant.Barcode;
                     sProductVariant.SKU = variant.SKU;
                     sProductVariant.Title = variant.Title;
                     sProductVariant.Weight = variant.Weight;

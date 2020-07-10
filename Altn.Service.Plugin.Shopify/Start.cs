@@ -46,12 +46,36 @@ namespace Altn.Service.Plugin.Shopify
                     }
                 }
 
+                //Delete duplicate products
+                var products = ShopifyProductRep.Get(_settings.ConnectionString, _settings.NumberOfDaysOld);
+
+                if (products == null || products.Count() == 0)
+                    goto DeleteCustomVariant;
+
+                _Log.Info("Delete Products Count :: " + products.Count());
+
+                foreach (var product in products)
+                {
+                    try
+                    {
+                        _Log.Info("Deleting Product :: " + product.ShopifyId + " :: " + product.Title);
+                        ProductService productService = new ProductService(_settings.ShopifyUrl, _settings.ShopAccessToken);
+                        productService.DeleteAsync(product.ShopifyId).Wait();
+                    }
+                    catch (Exception exp)
+                    {
+                        _Log.Error("Delete duplicate Resource :: " + exp.Message, exp);
+                    }
+                }
+
+            DeleteCustomVariant:
+                //Delete custom Variants
                 var variants = ShopifyProductVariantsRep.Get(_settings.ConnectionString, _settings.NumberOfDaysOld);
 
                 if (variants == null || variants.Count() == 0)
                     return;
 
-                _Log.Info("Variants Count :: " + variants.Count());
+                _Log.Info("Delete Custom Variants Count :: " + variants.Count());
 
                 foreach (var variant in variants)
                 {

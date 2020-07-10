@@ -5,6 +5,7 @@ CREATE TABLE [dbo].[ShopifyProductVariants](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
 	[ShopifyId] [bigint] NULL,
 	[ProductId] [bigint] NULL,
+	[Barcode] [nvarchar](20) NULL,
 	[CompareAtPrice] [decimal](18, 2) NULL,
 	[Price] [decimal](18, 2) NULL,
 	[SKU] [varchar](100) NULL,

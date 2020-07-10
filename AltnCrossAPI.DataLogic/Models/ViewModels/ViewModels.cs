@@ -23,6 +23,7 @@ namespace AltnCrossAPI.Database.ViewModels
         public long ProductId { get; set; }
         public long VariantId { get; set; }
         public decimal Price { get; set; }
+        public int UserCount { get; set; }
     }
     public class ResponseViewModel: BaseViewModels
     {
