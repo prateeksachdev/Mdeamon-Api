@@ -184,7 +184,6 @@ namespace AltnCrossAPI.BusinessLogic
                         {
                             ProductId = product.Id,
                             Price = model.Price,
-                            SKU = defaultVariant.SKU,
                             Barcode = "custom",
                             RequiresShipping = false
                         };
@@ -194,7 +193,7 @@ namespace AltnCrossAPI.BusinessLogic
                             switch (index)
                             {
                                 case 0:
-                                    variant.Option1 = defaultVariant.SKU + (model.Duration > 1 ? ("_" + model.Duration + "YR") : "") + "_" + model.Price + "_" + model.UserCount;//Variant Title depeds upon Options provided and Shopify does not create same title again and again
+                                    variant.Option1 = defaultVariant.SKU + (model.Duration > 1 ? ("_" + model.Duration + "YR") : "") + "_" + model.UserCount + "_" + model.Price;//Variant Title depeds upon Options provided and Shopify does not create same title again and again
                                     break;
                                 case 1:
                                     variant.Option2 = defaultVariant.SKU;
@@ -204,7 +203,7 @@ namespace AltnCrossAPI.BusinessLogic
                                     break;
                             }
                         }
-
+                        variant.SKU = variant.Option1;
 
                         if (product.Variants.Count() > 99)//Create duplicate product in shopify becasue shopify allow 100 variants max
                         {
