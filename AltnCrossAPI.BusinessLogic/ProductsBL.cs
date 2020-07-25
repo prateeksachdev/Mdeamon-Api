@@ -178,7 +178,6 @@ namespace AltnCrossAPI.BusinessLogic
                         else
                             product = await productService.GetAsync(model.ProductId);//child does not exists. continue with current product
 
-                        var defaultVariant = product.Variants.OrderBy(v => v.CreatedAt).FirstOrDefault();//To get SKU for new variant
                         //Create Custom Variant
                         ProductVariant variant = new ProductVariant()
                         {
@@ -193,13 +192,13 @@ namespace AltnCrossAPI.BusinessLogic
                             switch (index)
                             {
                                 case 0:
-                                    variant.Option1 = defaultVariant.SKU + (model.Duration > 1 ? ("_" + model.Duration + "YR") : "") + "_" + model.UserCount + "_" + model.Price;//Variant Title depeds upon Options provided and Shopify does not create same title again and again
+                                    variant.Option1 = model.ProductCode + "_" + model.SkuType + "_P1" + (model.Duration > 1 ? ("_" + model.Duration + "YR") : "") + "_" + model.UserCount + "_" + model.Price;//Variant Title depeds upon Options provided and Shopify does not create same title again and again
                                     break;
                                 case 1:
-                                    variant.Option2 = defaultVariant.SKU;
+                                    variant.Option2 = model.ProductCode + "_" + model.SkuType + "_P1"; //in case more options are there needed
                                     break;
                                 case 3:
-                                    variant.Option3 = "Custom";
+                                    variant.Option3 = "Custom";//in case needed
                                     break;
                             }
                         }
