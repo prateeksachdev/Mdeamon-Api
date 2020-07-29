@@ -202,7 +202,7 @@ namespace AltnCrossAPI.BusinessLogic
                                     break;
                             }
                         }
-                        variant.SKU = variant.Option1;
+                        variant.SKU = variant.Option1.Substring(0, variant.Option1.LastIndexOf('_'));
 
                         if (product.Variants.Count() > 99)//Create duplicate product in shopify becasue shopify allow 100 variants max
                         {
