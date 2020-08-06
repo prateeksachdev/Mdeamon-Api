@@ -192,7 +192,7 @@ namespace AltnCrossAPI.BusinessLogic
                             switch (index)
                             {
                                 case 0:
-                                    variant.Option1 = model.ProductCode + "_" + model.SkuType + "_P1" + (model.Duration > 1 ? ("_" + model.Duration + "YR") : "") + "_" + model.UserCount + "_" + model.Price;//Variant Title depeds upon Options provided and Shopify does not create same title again and again
+                                    variant.Option1 = model.ProductCode + "_" + (model.SkuType.ToLower() == "ren/upg" ? ("REN") : model.SkuType) + "_P1" + (new string[] { "upg", "ren/upg" }.Contains(model.SkuType.ToLower()) ? ("_P1") : "") + (model.Duration > 1 ? ("_" + model.Duration + "YR") : "") + "_" + model.UserCount + "_" + model.Price;//Variant Title depeds upon Options provided and Shopify does not create same title again and again
                                     break;
                                 case 1:
                                     variant.Option2 = model.ProductCode + "_" + model.SkuType + "_P1"; //in case more options are there needed
