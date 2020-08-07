@@ -78,7 +78,7 @@ namespace AltnCrossAPI.Controllers
         /// <param name="productValueArray">Array of Product Ids and corresponding Values</param>
         /// <returns>Returns Variants Ids</returns>
         [HttpPost]
-        [ValidateShopifyRequest]
+        //[ValidateShopifyRequest]
         [ActionName("CustomVariant")]
         public async Task<JsonResult<ResponseViewModel>> CustomProductVariant(object productValueArray)
         {

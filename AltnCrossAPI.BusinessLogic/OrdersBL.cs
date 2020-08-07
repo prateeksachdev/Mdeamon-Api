@@ -25,6 +25,7 @@ namespace AltnCrossAPI.BusinessLogic
         private IShopifyOrders _order;
         private IUsers _user;
         private IShopifyData _shopifyData;
+        private IShopifyCartPOWireNo _shopifyCartPONo;
         private IShopifyOrderAddresses _address;
         private ICustomersBL _customerBL;
         private IShopifyOrderLineItems _lineItem;
@@ -34,6 +35,7 @@ namespace AltnCrossAPI.BusinessLogic
                         IShopifyData shopifyData,
                         IUsers user,
                         IShopifyOrderLineItems lineItems,
+                        IShopifyCartPOWireNo shopifyCartPONo,
                         ICustomersBL customerBL,
                         IShopifyOrderAddresses addresses,
                         IRegKeys regKey,
@@ -43,12 +45,35 @@ namespace AltnCrossAPI.BusinessLogic
             _shopifyData = shopifyData;
             _customerBL = customerBL;
             _address = addresses;
+            _shopifyCartPONo = shopifyCartPONo;
             _lineItem = lineItems;
             _regKey = regKey;
             _user = user;
             _logger = logger;
         }
 
+
+        /// <summary>
+        /// Inserts/update a new shopify cart PO Wire Number
+        /// </summary>
+        /// <param name="model">ShopifyCartPOWireNoModel</param>
+        /// <returns>Returns status of the request after processing</returns>
+        public HttpStatusCode CartPOWireNoSync(object modeljson)
+        {
+            try
+            {
+                ShopifyCartPOWireNoModel model = JsonConvert.DeserializeObject<ShopifyCartPOWireNoModel>(modeljson.ToString());
+                //Adding logs of the json posted from shopify to the database 
+                _shopifyCartPONo.ShopifyCartPOWireNoInsertUpdate(model);
+
+                return HttpStatusCode.OK;
+            }
+            catch (Exception exp)
+            {
+                _logger.Error("CartPOWireNoSync", exp);
+                return HttpStatusCode.InternalServerError;
+            }
+        }
 
         /// <summary>
         /// Inserts a new shopify order or Update existing shopify order in db
@@ -191,7 +216,7 @@ namespace AltnCrossAPI.BusinessLogic
                         _address.ShopifyOrderAddresssesDelete(lineItemDeleteWhereClause);
                     }
 
-                    return await CompleteOrder(order);
+                    return await CompleteOrder(order, transactions);
                 }
                 else
                 {
@@ -212,13 +237,24 @@ namespace AltnCrossAPI.BusinessLogic
         /// </summary>
         /// <param name="order">ShopifySharp Order from Shopify</param>
         /// <returns>Returns status after processing the order</returns>
-        private async Task<string> CompleteOrder(Order order)
+        private async Task<string> CompleteOrder(Order order, IEnumerable<Transaction> transactions)
         {
             try
             {
                 List<NoteAttribute> noteAttributes = new List<NoteAttribute>();
+
+                if (transactions.Any(t => t.Gateway.ToLower().Contains("wire transfer") || t.Gateway.ToLower().Contains("po")))
+                {
+                    string po_number = _shopifyCartPONo.ShopifyCartPOWireNoGet(order.CartToken);
+                    if (!string.IsNullOrWhiteSpace(po_number))
+                    {
+                        noteAttributes.Add(new NoteAttribute { Name = "PO_Number", Value = po_number });
+                    }
+                }
+
+
                 var customer = _user.UserGetByShopifyCustomerID(order.Customer.Id);
-                if(!customer.IsPopulated)//Customer does not exist. Add it.
+                if (!customer.IsPopulated)//Customer does not exist. Add it.
                 {
                     _customerBL.CustomerSync(order.Customer);
                 }

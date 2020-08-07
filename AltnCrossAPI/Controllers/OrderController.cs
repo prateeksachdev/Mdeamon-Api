@@ -6,6 +6,7 @@ using ShopifySharp;
 using System.Threading.Tasks;
 using System.Web.Http;
 using static AltnCrossAPI.Shared.Enums;
+using System.Net;
 
 namespace AltnCrossAPI.Controllers
 {
@@ -31,6 +32,18 @@ namespace AltnCrossAPI.Controllers
         {
             Order order = JsonConvert.DeserializeObject<Order>(orderJson.ToString());
             return await _ordersBL.OrderSync(order);
+        }
+
+        /// <summary>
+        /// Action method to Inserts/update a new shopify cart PO Wire Number
+        /// </summary>
+        /// <param name="model">ShopifyCartPOWireNoModel</param>
+        /// <returns>Returns status of the request after processing</returns>
+        [HttpPost]
+        [ActionName("CartPOWireNoSync")]
+        public HttpStatusCode CartPOWireNoSync(object model)
+        {
+            return _ordersBL.CartPOWireNoSync(model);
         }
     }
 }
