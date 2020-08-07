@@ -11,6 +11,8 @@ namespace AltnCrossAPI.Database.Interfaces
 
         long ShopifyProductVariantIdGet(long productId, decimal price);
 
+        long ShopifyProductVariantIdGetByTitle(long productId, string variantTitle);
+
         void ShopifyProductVariantsDelete(string whereClause, long productId);
     }
 }

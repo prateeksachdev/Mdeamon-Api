@@ -30,6 +30,15 @@ namespace AltnCrossAPI.Database
             return _dbHelper.ExecuteReaderQuery<long>("exec ShopifyProductVariantIdGet @ProductId, @Price", parameters);
         }
 
+        public long ShopifyProductVariantIdGetByTitle(long productId, string variantTitle)
+        {
+            SqlParameter[] parameters = { new SqlParameter("@ProductId", productId),
+            new SqlParameter("@VariantTitle", variantTitle)
+            };
+
+            return _dbHelper.ExecuteReaderQuery<long>("exec ShopifyProductVariantIdGetByTitle @ProductId, @VariantTitle", parameters);
+        }
+
         public DataTable ShopifyProductVariantsByProductIdGet(long productId)
         {
             SqlParameter[] parameters = { new SqlParameter("@ProductId", productId) };

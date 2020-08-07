@@ -152,10 +152,12 @@ namespace AltnCrossAPI.BusinessLogic
             {
                 foreach (CustomVariantViewModel model in variantModel)
                 {
+                    string variantTitle = model.ProductCode + "_" + (model.SkuType.ToLower() == "ren/upg" ? ("REN") : model.SkuType) + "_P1" + (new string[] { "upg", "ren/upg" }.Contains(model.SkuType.ToLower()) ? ("_P1") : "") + (model.Duration > 1 ? ("_" + model.Duration + "YR") : "") + "_" + model.UserCount + "_" + model.Price;
                     long variantId = _productVariant.ShopifyProductVariantIdGet(model.ProductId, model.Price);
-                    if (variantId > 0)//check if product already has this variant
+                    long variantIdByTitle = _productVariant.ShopifyProductVariantIdGetByTitle(model.ProductId, variantTitle);
+                    if (variantId > 0 ||  variantIdByTitle > 0)//check if product already has this variant
                     {
-                        model.VariantId = variantId;
+                        model.VariantId = variantId > variantIdByTitle ? variantId : variantIdByTitle;
                     }
                     else
                     {
@@ -164,10 +166,11 @@ namespace AltnCrossAPI.BusinessLogic
                         if (localProduct?.ShopifyId > 0)
                         {
                             variantId = _productVariant.ShopifyProductVariantIdGet(localProduct.ShopifyId, model.Price);
+                            variantIdByTitle = _productVariant.ShopifyProductVariantIdGetByTitle(model.ProductId, variantTitle);
                             model.ProductId = localProduct.ShopifyId;
-                            if (variantId > 0)//check if child product already has this variant
+                            if (variantId > 0 || variantIdByTitle > 0)//check if child product already has this variant
                             {
-                                model.VariantId = variantId;
+                                model.VariantId = variantId > variantIdByTitle ? variantId : variantIdByTitle;
                                 continue;
                             }
                             else
