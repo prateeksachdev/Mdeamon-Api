@@ -7,6 +7,6 @@ namespace AltnCrossAPI.BusinessLogic.Interfaces
     public interface IOrdersBL
     {
         Task<string> OrderSync(Order order);
-        HttpStatusCode CartPOWireNoSync(object model);
+        string CartPOWireNoSync(object model);
     }
 }

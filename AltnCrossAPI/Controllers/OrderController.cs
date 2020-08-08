@@ -41,7 +41,7 @@ namespace AltnCrossAPI.Controllers
         /// <returns>Returns status of the request after processing</returns>
         [HttpPost]
         [ActionName("CartPOWireNoSync")]
-        public HttpStatusCode CartPOWireNoSync(object model)
+        public string CartPOWireNoSync(object model)
         {
             return _ordersBL.CartPOWireNoSync(model);
         }

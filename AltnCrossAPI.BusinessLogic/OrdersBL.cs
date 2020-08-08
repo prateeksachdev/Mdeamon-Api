@@ -58,7 +58,7 @@ namespace AltnCrossAPI.BusinessLogic
         /// </summary>
         /// <param name="model">ShopifyCartPOWireNoModel</param>
         /// <returns>Returns status of the request after processing</returns>
-        public HttpStatusCode CartPOWireNoSync(object modeljson)
+        public string CartPOWireNoSync(object modeljson)
         {
             try
             {
@@ -66,12 +66,12 @@ namespace AltnCrossAPI.BusinessLogic
                 //Adding logs of the json posted from shopify to the database 
                 _shopifyCartPONo.ShopifyCartPOWireNoInsertUpdate(model);
 
-                return HttpStatusCode.OK;
+                return HttpStatusCode.OK.ToString();
             }
             catch (Exception exp)
             {
                 _logger.Error("CartPOWireNoSync", exp);
-                return HttpStatusCode.InternalServerError;
+                return HttpStatusCode.InternalServerError.ToString();
             }
         }
 
@@ -95,6 +95,19 @@ namespace AltnCrossAPI.BusinessLogic
 
                 var transactions = await transactionService.ListAsync(order.Id ?? 0);
                 bool paymentRequired = !(transactions.Any(t => t.Gateway.ToLower().Contains("wire transfer") || t.Gateway.ToLower().Contains("po") || t.Gateway.ToLower().Contains("payment on account")));
+
+                if (transactions.Any(t => t.Gateway.ToLower().Contains("wire transfer") || t.Gateway.ToLower().Contains("po")))
+                {
+                    string po_number = _shopifyCartPONo.ShopifyCartPOWireNoGet(order.CartToken);
+                    if (!string.IsNullOrWhiteSpace(po_number))
+                    {
+                        var orderUpdated = await orderService.UpdateAsync(order.Id ?? 0, new Order()
+                        {
+                            NoteAttributes = new List<NoteAttribute> { new NoteAttribute { Name = "PO_Number", Value = po_number } }
+                        });
+                    }
+                }
+
                 if ((transactions.Any(t => t.Gateway.ToLower().Contains("wire transfer") || t.Gateway.ToLower().Contains("po"))) && !order.Tags.Contains("Payment Received"))
                 {
                     //add tag to shopify order
@@ -216,7 +229,7 @@ namespace AltnCrossAPI.BusinessLogic
                         _address.ShopifyOrderAddresssesDelete(lineItemDeleteWhereClause);
                     }
 
-                    return await CompleteOrder(order, transactions);
+                    return await CompleteOrder(order);
                 }
                 else
                 {
@@ -237,21 +250,11 @@ namespace AltnCrossAPI.BusinessLogic
         /// </summary>
         /// <param name="order">ShopifySharp Order from Shopify</param>
         /// <returns>Returns status after processing the order</returns>
-        private async Task<string> CompleteOrder(Order order, IEnumerable<Transaction> transactions)
+        private async Task<string> CompleteOrder(Order order)
         {
             try
             {
                 List<NoteAttribute> noteAttributes = new List<NoteAttribute>();
-
-                if (transactions.Any(t => t.Gateway.ToLower().Contains("wire transfer") || t.Gateway.ToLower().Contains("po")))
-                {
-                    string po_number = _shopifyCartPONo.ShopifyCartPOWireNoGet(order.CartToken);
-                    if (!string.IsNullOrWhiteSpace(po_number))
-                    {
-                        noteAttributes.Add(new NoteAttribute { Name = "PO_Number", Value = po_number });
-                    }
-                }
-
 
                 var customer = _user.UserGetByShopifyCustomerID(order.Customer.Id);
                 if (!customer.IsPopulated)//Customer does not exist. Add it.
@@ -293,7 +296,7 @@ namespace AltnCrossAPI.BusinessLogic
                     //add keys to shopify order
                     var orderUpdated = await orderService.UpdateAsync(order.Id ?? 0, new Order()
                     {
-                        NoteAttributes = noteAttributes
+                        NoteAttributes = order.NoteAttributes.Union(noteAttributes)
                     });
 
                     //check if order updated or not
